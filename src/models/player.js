@@ -1,7 +1,9 @@
-/* import ModelFactory from './factory';
+import ModelFactory from './factory';
 import Pawn from './pawn';
 import Board from './board';
 import Cemetary from './board';
+import Deck from './deck';
+import Hand from './hand';
 
 export default class Player extends Pawn {
 
@@ -9,8 +11,11 @@ export default class Player extends Pawn {
         super();
         this.type = config.type;
 
-        this.deck = ModelFactory.get('deck');
-        this.hand = ModelFactory.get('hand');
+        /* this.deck = ModelFactory.get('deck');
+        this.hand = ModelFactory.get('hand'); */
+
+        this.hand = new Hand();
+        this.deck = new Deck();
         this.board = new Board();
         this.cemetary = new Cemetary();
     }
@@ -34,7 +39,4 @@ export default class Player extends Pawn {
     attack(pos, target) {
         return board.removeCard(pos).attack(target);
     }
-
-
-
-} */
+}

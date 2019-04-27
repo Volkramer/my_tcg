@@ -4,33 +4,41 @@ export default class Deck {
     }
 
     shuffle() {
-        let deck = this.cards;
 
-        let shuffled = function () {
-            var i = 0,
-                j = 0,
-                temp = null
-
-            for (i = this.cards.length - 1; i > 0; i -= 1) {
-                j = Math.floor(Math.random() * (i + 1));
-                temp = this.cards[i];
-                this.cards[i] = this.cards[j];
-                this.cards[j] = temp;
-            }
+        /* test if deck is falsy */
+        if (!Array.isArray(this.cards) || !this.cards.length) {
+            return false
         }
 
-        if (shuffled === deck) {
-            this.cards = shuffled;
-            return false;
-        } else {
-            this.cards = shuffled;
-            return true;
+        /* shuffle the deck and save it into shuffled */
+        this.cards = this.randomShuffle(this.cards);
+        return true;
+    }
+
+    /* the famous Fisher-Yates algorythm shuffle method*/
+    randomShuffle(array) {
+        var currentIndex = array.length,
+            temporaryValue, randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
         }
+        return array;
     }
 
     draw() {
-        if (this.cards.length == 0) {
-            return false;
+
+        if (!Array.isArray(this.cards) || !this.cards.length) {
+            return false
         } else {
             let card = this.cards.shift();
             return card;

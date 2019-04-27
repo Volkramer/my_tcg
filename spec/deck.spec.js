@@ -6,9 +6,24 @@ const deck = new Deck(param);
 
 describe('Deck', function () {
 	describe('Shuffle', function () {
-		it('Must return boolean', function () {
-			expect(typeof deck.shuffle()).toEqual('boolean');
+		it('Without card in deck, must return false', function () {
+			deck.cards = [];
+			expect(deck.shuffle()).toEqual(false);
 		});
+		it('If deck is a falsy array, must return false', function () {
+			deck.cards = 3;
+			expect(deck.shuffle()).toEqual(false);
+			deck.cards = 'test';
+			expect(deck.shuffle()).toEqual(false);
+			deck.cards = true;
+			expect(deck.shuffle()).toEqual(false);
+			deck.cards = null;
+			expect(deck.shuffle()).toEqual(false);
+		});
+		it('if deck is shuffled, must return true', function () {
+			deck.cards = ['test', 'test2', 'test3'];
+			expect(deck.shuffle()).toEqual(true);
+		})
 	});
 
 	describe('Draw', function () {
@@ -20,6 +35,16 @@ describe('Deck', function () {
 			deck.cards = [];
 			expect(deck.draw()).toBe(false);
 		});
+		it('If deck is a falsy array, must return false', function () {
+			deck.cards = 3;
+			expect(deck.shuffle()).toEqual(false);
+			deck.cards = 'test';
+			expect(deck.shuffle()).toEqual(false);
+			deck.cards = true;
+			expect(deck.shuffle()).toEqual(false);
+			deck.cards = null;
+			expect(deck.shuffle()).toEqual(false);
+		});
 	});
 
 	describe('GetCardsCount', function () {
@@ -30,6 +55,16 @@ describe('Deck', function () {
 		it('Must return 3 if deck has 3 cards', function () {
 			deck.cards = ['test', 'test1', 'test2'];
 			expect(deck.getCardsCount()).toBe(3);
+		});
+		it('If deck is a falsy array, must return false', function () {
+			deck.cards = 3;
+			expect(deck.shuffle()).toEqual(false);
+			deck.cards = 'test';
+			expect(deck.shuffle()).toEqual(false);
+			deck.cards = true;
+			expect(deck.shuffle()).toEqual(false);
+			deck.cards = null;
+			expect(deck.shuffle()).toEqual(false);
 		});
 	});
 
