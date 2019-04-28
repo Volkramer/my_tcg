@@ -4,7 +4,7 @@ import Config from '../src/models/config';
 var param = JSON.parse(Config.deck.param);
 const deck = new Deck(param);
 
-describe('Deck', function () {
+describe('DECK', function () {
 	describe('Shuffle', function () {
 		it('Without card in deck, must return false', function () {
 			deck.cards = [];

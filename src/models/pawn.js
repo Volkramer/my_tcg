@@ -21,10 +21,13 @@ export default class Pawn extends EventManager {
     }
 
     attack(target) {
-        target.recieveAttack(this);
+        if (typeof target !== 'object') {
+            return false;
+        }
+        return target.recieveAttack(this);
     }
 
-    recieveAttack(opponent, strikeBack = false) {
+    recieveAttack(opponent = false, strikeBack = false) {
         if (strikeBack === true) {
             this.life = this.life - opponent.getDef();
             return true;

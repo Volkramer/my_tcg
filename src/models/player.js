@@ -1,27 +1,35 @@
 import ModelFactory from './factory';
 import Pawn from './pawn';
 import Board from './board';
-import Cemetary from './board';
+import Cemetary from './cemetary';
 import Deck from './deck';
 import Hand from './hand';
 
 export default class Player extends Pawn {
 
-    constructor(config) {
-        super();
+    constructor(config, life, strength, def) {
+        super(life, strength, def);
         this.type = config.type;
 
         /* this.deck = ModelFactory.get('deck');
-        this.hand = ModelFactory.get('hand'); */
+        this.hand = ModelFactory.get('hand');
+        this.board = ModelFactory.get('board');
+        this.cemetary = ModelFactory.get('cemetary'); */
 
-        this.hand = new Hand();
-        this.deck = new Deck();
-        this.board = new Board();
-        this.cemetary = new Cemetary();
+        this.hand = new Hand(config);
+        this.deck = new Deck(config);
+        this.board = new Board(config);
+        this.cemetary = new Cemetary(config);
     }
 
-    shuffle(deck) {
-        return deck.shuffle();
+    shuffle(deck = 'deck') {
+        if (deck === 'deck') {
+            return this.deck.shuffle();
+        } else if (deck === 'cemetary') {
+            return this.cemetary.shuffle();
+        } else {
+            return false;
+        }
     }
 
     draw() {
@@ -29,14 +37,18 @@ export default class Player extends Pawn {
     }
 
     playCard(pos) {
-        return board.addCard(hand.removeCard(pos));
+        return this.board.addCard(this.hand.removeCard(pos));
     }
 
     discard(pos) {
-        return cemetary.addCard(hand.removeCard(pos));
+        return this.cemetary.insertAt(this.hand.removeCard(pos), 0);
     }
 
     attack(pos, target) {
-        return board.removeCard(pos).attack(target);
+        if (typeof this.board.cards[pos] !== 'object') {
+            return false;
+        }
+        const attacker = new Pawn(this.board.cards[pos].life, this.board.cards[pos].strength, this.board.cards[pos].def);
+        return attacker.attack(target);
     }
 }

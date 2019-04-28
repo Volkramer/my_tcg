@@ -4,11 +4,16 @@ import Hand from '../src/models/hand';
 let param = JSON.parse(config.hand.param);
 const hand = new Hand(param);
 
-describe('Hand', function () {
+describe('HAND', function () {
 
     describe('addCard', function () {
         it('Must return true if everything is fine', function () {
+            hand.cards = ['test1', 'test2', 'test3'];
             expect(hand.addCard('test')).toBe(true);
+        });
+        it('Must return false if hand is full', function () {
+            hand.cards = ['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7'];
+            expect(hand.addCard('test')).toBe(false);
         });
     });
 
@@ -33,4 +38,13 @@ describe('Hand', function () {
             expect(hand.getAllCards()).toEqual(['test']);
         });
     });
+
+    describe('getCardsCount', function () {
+        it('Must return the number of cards in deck', function () {
+            hand.cards = ['test', 'test1', 'test2'];
+            expect(hand.getCardsCount()).toEqual(3);
+            hand.cards = ['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7'];
+            expect(hand.getCardsCount()).toEqual(7);
+        })
+    })
 });

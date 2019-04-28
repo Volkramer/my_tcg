@@ -4,10 +4,14 @@ export default class Hand {
         this.limit = config.limit;
     }
 
-    addCard(card) {
-        let oldSize = this.cards.length;
-        if (oldSize === this.limit) {
-            return false;
+    addCard(card = false) {
+        if (!Array.isArray(this.cards) || (this.cards.length === this.limit) || (card === false)) {
+            return false
+        }
+        if (!this.cards.length) {
+            var oldSize = 0;
+        } else {
+            var oldSize = this.cards.length;
         }
         let newSize = this.cards.push(card);
         if (oldSize === (newSize - 1) && this.cards[(this.cards.length) - 1] === card) {
@@ -18,12 +22,11 @@ export default class Hand {
     }
 
     removeCard(pos) {
-        let card = this.cards.splice(pos, 1);
-        if (typeof card[0] === "string") {
-            return card[0];
-        } else {
-            return false;
+        if (!Array.isArray(this.cards) || !(pos >= 0 && pos < this.cards.length)) {
+            return false
         }
+        let card = this.cards.splice(pos, 1);
+        return card[0];
     }
 
     getAllCards() {

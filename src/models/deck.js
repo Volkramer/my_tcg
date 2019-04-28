@@ -49,7 +49,10 @@ export default class Deck {
         return this.cards.length;
     }
 
-    insertAt(card, pos) {
+    insertAt(card = false, pos) {
+        if (!Array.isArray(this.cards) || (card === false)) {
+            return false
+        }
         let oldDeckSize = this.cards.length;
         this.cards.splice(pos, 0, card);
         if (oldDeckSize + 1 === this.cards.length) {
