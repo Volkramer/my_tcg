@@ -11,15 +11,15 @@ export default class Player extends Pawn {
         super(life, strength, def);
         this.type = config.type;
 
-        /* this.deck = ModelFactory.get('deck');
+        this.deck = ModelFactory.get('deck');
         this.hand = ModelFactory.get('hand');
         this.board = ModelFactory.get('board');
-        this.cemetary = ModelFactory.get('cemetary'); */
+        this.cemetary = ModelFactory.get('cemetary');
 
-        this.hand = new Hand(config);
+        /* this.hand = new Hand(config);
         this.deck = new Deck(config);
         this.board = new Board(config);
-        this.cemetary = new Cemetary(config);
+        this.cemetary = new Cemetary(config); */
     }
 
     shuffle(deck = 'deck') {

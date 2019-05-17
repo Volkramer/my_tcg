@@ -5,7 +5,7 @@ var param = JSON.parse(Config.deck.param);
 const cemetary = new Cemetary(param);
 
 describe('CEMETARY', function () {
-    describe('Shuffle', function () {
+    describe('shuffle', function () {
         it('Without card in cemetary, must return false', function () {
             cemetary.cards = [];
             expect(cemetary.shuffle()).toEqual(false);
@@ -26,7 +26,7 @@ describe('CEMETARY', function () {
         })
     });
 
-    describe('Draw', function () {
+    describe('draw', function () {
         it('Must return the first card test in the cemetary', function () {
             cemetary.cards = ['test', 'test2', 'test3'];
             expect(cemetary.draw()).toBe('test');
@@ -47,7 +47,7 @@ describe('CEMETARY', function () {
         });
     });
 
-    describe('GetCardsCount', function () {
+    describe('getCardsCount', function () {
         it('Must return 0 if cemetary is empty', function () {
             cemetary.cards = [];
             expect(cemetary.getCardsCount()).toBe(0);
@@ -68,7 +68,7 @@ describe('CEMETARY', function () {
         });
     });
 
-    describe('InsertAt', function () {
+    describe('insertAt', function () {
         it('Must return true if function working', function () {
             cemetary.cards = ['test'];
             expect(cemetary.insertAt('test1', 0)).toBe(true);

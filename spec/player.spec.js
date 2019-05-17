@@ -21,7 +21,7 @@ const test3 = {
 };
 
 describe('PLAYER', function () {
-    describe('Shuffle', function () {
+    describe('shuffle', function () {
         it('Shuffle on player deck must return true', function () {
             player.deck.cards = [test1, test2, test3];
             expect(player.shuffle()).toBe(true);
@@ -35,7 +35,7 @@ describe('PLAYER', function () {
         });
     });
 
-    describe('Draw', function () {
+    describe('draw', function () {
         it('Draw must return the first card of the player deck', function () {
             player.deck.cards = [test1, test2, test3];
             expect(player.draw()).toEqual(Object({
@@ -50,7 +50,7 @@ describe('PLAYER', function () {
         });
     });
 
-    describe('PlayCard', function () {
+    describe('playCard', function () {
         it('Must return true if card from hand is played on board', function () {
             player.board.cards = [];
             player.hand.cards = [test1, test2, test3];
@@ -68,7 +68,7 @@ describe('PLAYER', function () {
         });
     });
 
-    describe('Discard', function () {
+    describe('discard', function () {
         it('Must return true if card is discarded from hand into cemetary', function () {
             player.cemetary.cards = [];
             player.hand.cards = [test1, test2, test3];
@@ -86,7 +86,7 @@ describe('PLAYER', function () {
         });
     });
 
-    describe('Attack', function () {
+    describe('attack', function () {
         it('Must return true if attack is successfull', function () {
             player.board.cards = [test1, test2, test3];
             const target = new Pawn(20, 20, 20);

@@ -1,10 +1,11 @@
 import EventManager from "../eventManager";
+import Player from './player';
 
 export default class Game extends EventManager {
     constructor(config) {
         super();
-        this.up = config.up;
-        this.down = config.down;
+        this.up = new Player(config);
+        this.down = new Player(config);
         this.turn = '';
     }
 
@@ -34,6 +35,14 @@ export default class Game extends EventManager {
     }
 
     proxy(side, action, payload) {
-
+        if (!(typeof side === "string") && (!(side === "up") || !(side === "down")) || !(typeof action === "string")) {
+            return false
+        } else {
+            if (side === "up") {
+                return this.up[action](payload);
+            } else {
+                return this.down[action](payload);
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@ var param = JSON.parse(Config.deck.param);
 const deck = new Deck(param);
 
 describe('DECK', function () {
-	describe('Shuffle', function () {
+	describe('shuffle', function () {
 		it('Without card in deck, must return false', function () {
 			deck.cards = [];
 			expect(deck.shuffle()).toEqual(false);
@@ -26,7 +26,7 @@ describe('DECK', function () {
 		})
 	});
 
-	describe('Draw', function () {
+	describe('draw', function () {
 		it('Must return the first card test in the deck', function () {
 			deck.cards = ['test', 'test2', 'test3'];
 			expect(deck.draw()).toBe('test');
@@ -47,7 +47,7 @@ describe('DECK', function () {
 		});
 	});
 
-	describe('GetCardsCount', function () {
+	describe('getCardsCount', function () {
 		it('Must return 0 if deck is empty', function () {
 			deck.cards = [];
 			expect(deck.getCardsCount()).toBe(0);
@@ -68,7 +68,7 @@ describe('DECK', function () {
 		});
 	});
 
-	describe('InsertAt', function () {
+	describe('insertAt', function () {
 		it('Must return true if function working', function () {
 			deck.cards = ['test'];
 			expect(deck.insertAt('test1', 0)).toBe(true);

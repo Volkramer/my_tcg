@@ -17,7 +17,8 @@ export default {
 
         if (models[modelName]) {
             var configParams = JSON.parse(models[modelName].param),
-                constructorParams = $.extend({}, configParams, params);
+                constructorParams = Object.assign({}, configParams, params);
+
 
             var inst = Object.create(models[modelName].class.prototype);
             models[modelName].class.call(inst, constructorParams);
