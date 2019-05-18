@@ -37,8 +37,6 @@ const getAllMethods = (obj) => {
     return props
 }
 
-console.log(getAllMethods(player));
-
 describe('GAME', function () {
     describe('getTurn', function () {
         it('Must return a string', function () {
@@ -49,5 +47,30 @@ describe('GAME', function () {
         it('Must return a string', function () {
             expect(typeof game.changeTurn()).toEqual('string');
         })
+    });
+    describe('proxy', function () {
+        let allMethods = [],
+            gameMethods = [],
+            deckMethods = [],
+            playerMethods = [],
+            handMethods = [],
+            boardMethods = [],
+            cemetaryMethods = [];
+        gameMethods = getAllMethods(game);
+        deckMethods = getAllMethods(deck);
+        playerMethods = getAllMethods(player);
+        handMethods = getAllMethods(hand);
+        boardMethods = getAllMethods(board);
+        cemetaryMethods = getAllMethods(cemetary);
+        allMethods = allMethods.concat(gameMethods, deckMethods, playerMethods, handMethods, boardMethods, cemetaryMethods);
+        // console.log(allMethods);
+        allMethods.forEach(element => {
+            it(element + ' must not return undefined', function () {
+                expect(typeof game.proxy(game.up, element, 'test')).not.toEqual('undefined');
+                expect(typeof game.proxy(game.down, element, 'test')).not.toEqual('undefined');
+                expect(typeof game.proxy(game.up, element)).not.toEqual('undefined');
+                expect(typeof game.proxy(game.down, element)).not.toEqual('undefined');
+            });
+        });
     });
 });
