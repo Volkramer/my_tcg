@@ -35,14 +35,14 @@ export default class Game extends EventManager {
     }
 
     proxy(side, action, payload = null) {
-        if (!(typeof side === "string") && (!(side === "up") || !(side === "down")) || !(typeof action === "string")) {
+        if ((!(typeof side === "string") && (!(side === "up") || !(side === "down"))) || !(typeof action === "string")) {
             return false
         } else {
             if (payload === null) {
                 if (side === "up") {
-                    return this.up[action];
+                    return this.up[action]();
                 } else {
-                    return this.down[action];
+                    return this.down[action]();
                 }
             } else {
                 if (side === "up") {
